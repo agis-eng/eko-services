@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EKO AI Marketing — Service Models</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0f1e; color: #f0f4ff; min-height: 100vh; }
+
+.hero { text-align: center; padding: 56px 24px 40px; background: linear-gradient(180deg, #0d1a35 0%, #0a0f1e 100%); border-bottom: 1px solid #1e2d4a; }
+.badge { display: inline-block; background: #1a3a6e; color: #60a5fa; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #2563eb33; }
+.hero h1 { font-size: clamp(24px, 5vw, 40px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 14px; }
+.hero h1 span { background: linear-gradient(90deg, #3b82f6, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { font-size: 16px; color: #94a3b8; max-width: 540px; margin: 0 auto 8px; line-height: 1.6; }
+.hero .sub { font-size: 12px; color: #334155; margin-top: 4px; }
+
+.tabs { display: flex; justify-content: center; gap: 8px; padding: 28px 16px 0; flex-wrap: wrap; }
+.tab { padding: 9px 20px; border-radius: 24px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #1e3a5f; background: transparent; color: #64748b; transition: all 0.2s; }
+.tab.active, .tab:hover { background: #1e40af; color: #fff; border-color: #3b82f6; }
+
+.section { display: none; padding: 36px 16px 72px; max-width: 1080px; margin: 0 auto; }
+.section.active { display: block; }
+.sec-head { text-align: center; margin-bottom: 36px; }
+.sec-head h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.sec-head p { font-size: 14px; color: #94a3b8; max-width: 480px; margin: 0 auto; }
+
+/* TIERS */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
+.tier { background: #0d1a35; border: 1px solid #1e3a5f; border-radius: 16px; padding: 26px 22px; position: relative; }
+.tier.hot { border-color: #3b82f6; }
+.hot-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #3b82f6; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; white-space: nowrap; }
+.t-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #475569; margin-bottom: 5px; }
+.t-price { font-size: 34px; font-weight: 800; }
+.t-price sub { font-size: 14px; font-weight: 400; color: #64748b; vertical-align: baseline; }
+.t-tag { font-size: 13px; color: #94a3b8; margin: 8px 0 18px; padding-bottom: 18px; border-bottom: 1px solid #1e3a5f; }
+.t-list { list-style: none; }
+.t-list li { display: flex; gap: 9px; font-size: 13px; color: #cbd5e1; margin-bottom: 9px; line-height: 1.4; }
+.ck { color: #22d3ee; flex-shrink: 0; }
+.ck.off { color: #1e3a5f; }
+.t-btn { display: block; text-align: center; margin-top: 22px; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; background: #1e3a5f; color: #93c5fd; border: 1px solid #2563eb44; }
+.tier.hot .t-btn { background: #3b82f6; color: #fff; border-color: #60a5fa; }
+
+/* ALACARTE */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+.card { background: #0d1a35; border: 1px solid #1e3a5f; border-radius: 14px; padding: 20px 18px; }
+.c-icon { font-size: 26px; margin-bottom: 10px; }
+.c-name { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.c-price { font-size: 22px; font-weight: 800; color: #22d3ee; }
+.c-price small { font-size: 13px; font-weight: 400; color: #475569; }
+.c-desc { font-size: 13px; color: #94a3b8; line-height: 1.5; margin: 8px 0; }
+.c-inc { font-size: 11px; color: #475569; }
+.c-inc b { color: #60a5fa; }
+.ot { display: inline-block; background: #1e2d4a; color: #f59e0b; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-bottom: 6px; }
+
+/* OUTCOMES */
+.outcomes { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+.out { background: #0d1a35; border: 1px solid #1e3a5f; border-radius: 16px; overflow: hidden; }
+.out-h { padding: 22px; border-bottom: 1px solid #1e3a5f; }
+.out-num { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+.out-name { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+.out-sub { font-size: 13px; color: #94a3b8; line-height: 1.4; }
+.out-pr { display: flex; align-items: baseline; gap: 5px; margin-top: 14px; }
+.out-pr strong { font-size: 30px; font-weight: 800; }
+.out-pr span { font-size: 13px; color: #475569; }
+.out-b { padding: 22px; }
+.out-b h4 { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #334155; margin-bottom: 12px; }
+.out-b ul { list-style: none; }
+.out-b li { display: flex; gap: 9px; font-size: 13px; color: #cbd5e1; margin-bottom: 9px; line-height: 1.4; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.out-cta { display: block; text-align: center; margin: 0 22px 22px; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; border: 1px solid; }
+
+.blue .out-num, .blue .out-name { color: #60a5fa; }
+.blue .dot { background: #60a5fa; }
+.blue .out-cta { color: #60a5fa; border-color: #60a5fa33; background: #0f1e3520; }
+
+.cyan .out-num, .cyan .out-name { color: #22d3ee; }
+.cyan .dot { background: #22d3ee; }
+.cyan .out-cta { color: #22d3ee; border-color: #22d3ee33; background: #0e353a20; }
+
+.violet .out-num, .violet .out-name { color: #a78bfa; }
+.violet .dot { background: #a78bfa; }
+.violet .out-cta { color: #a78bfa; border-color: #a78bfa33; background: #2a1a4220; }
+
+/* COMPARE */
+.ctable { width: 100%; border-collapse: collapse; font-size: 13px; overflow-x: auto; display: block; }
+.ctable th { text-align: left; padding: 10px 12px; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1e3a5f; white-space: nowrap; }
+.ctable td { padding: 11px 12px; border-bottom: 1px solid #0d1a35; color: #cbd5e1; vertical-align: top; }
+.ctable tr:hover td { background: #0d1a3580; }
+.yes { color: #22c55e; }
+.no { color: #334155; }
+.mid { color: #f59e0b; }
+
+.rec { background: linear-gradient(135deg, #0d2045, #0a0f1e); border: 1px solid #3b82f644; border-radius: 14px; padding: 26px; margin-top: 36px; text-align: center; }
+.rec .rbadge { display: inline-block; background: #3b82f622; color: #60a5fa; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; border: 1px solid #3b82f633; }
+.rec h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.rec p { font-size: 14px; color: #94a3b8; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+.lead-box { margin-top: 28px; background: #0d1a35; border: 1px solid #1e3a5f; border-radius: 14px; padding: 24px; }
+.lead-box h3 { font-size: 14px; font-weight: 700; color: #f0f4ff; margin-bottom: 14px; }
+.lead-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.lead-item { font-size: 12px; color: #94a3b8; padding: 10px 12px; background: #0a0f1e; border-radius: 8px; border: 1px solid #1e3a5f; }
+.lead-item b { color: #60a5fa; display: block; margin-bottom: 3px; }
+.star { border-color: #3b82f644; color: #60a5fa; font-weight: 600; font-size: 12px; }
+
+@media (max-width: 600px) {
+  .hero { padding: 36px 18px 28px; }
+  .section { padding: 24px 12px 56px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">EKO AI Marketing — Internal Review</div>
+  <h1>AI-Powered Marketing<br><span>Done For You</span></h1>
+  <p>Three service models for selling AI marketing to business owners. Compare all three and choose what fits best.</p>
+  <p class="sub">Prepared for Erik &amp; Anton — May 2026 · Confidential</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('a',this)">A — Three Tiers</button>
+  <button class="tab" onclick="show('b',this)">B — À La Carte</button>
+  <button class="tab" onclick="show('c',this)">C — Outcome Bundles ⭐</button>
+  <button class="tab" onclick="show('d',this)">Compare All</button>
+</div>
+
+<!-- A -->
+<div id="s-a" class="section active">
+  <div class="sec-head"><h2>Model A — Three-Tier Monthly Retainer</h2><p>Fixed packages. Clients pick a tier. Simple to explain, simple to sell.</p></div>
+  <div class="tiers">
+    <div class="tier">
+      <div class="t-label">Starter</div>
+      <div class="t-price">$497<sub>/mo</sub></div>
+      <div class="t-tag">Get your brand showing up consistently</div>
+      <ul class="t-list">
+        <li><span class="ck">✓</span>20 AI social posts/month (LinkedIn, FB, IG, TikTok)</li>
+        <li><span class="ck">✓</span>Scheduled &amp; posted via GHL</li>
+        <li><span class="ck">✓</span>Reddit monitoring — 10 replies drafted/month</li>
+        <li><span class="ck">✓</span>1 competitor audit/month</li>
+        <li><span class="ck">✓</span>Monthly content calendar</li>
+        <li><span class="ck off">✓</span><span style="color:#334155">Meta Ads — not included</span></li>
+        <li><span class="ck off">✓</span><span style="color:#334155">FB Group audiences — not included</span></li>
+      </ul>
+      <a href="#" class="t-btn">Get Started →</a>
+    </div>
+    <div class="tier hot">
+      <div class="hot-tag">Most Popular</div>
+      <div class="t-label">Growth</div>
+      <div class="t-price">$997<sub>/mo</sub></div>
+      <div class="t-tag">Organic + paid working together</div>
+      <ul class="t-list">
+        <li><span class="ck">✓</span>Everything in Starter</li>
+        <li><span class="ck">✓</span>Meta Ads managed (up to $3K/mo spend)</li>
+        <li><span class="ck">✓</span>Facebook Group scraping → Custom Audiences</li>
+        <li><span class="ck">✓</span>Content repurposing — 2 videos → 20 posts</li>
+        <li><span class="ck">✓</span>Reddit raised to 20 replies + 4 original posts/mo</li>
+        <li><span class="ck">✓</span>Weekly ad performance report</li>
+        <li><span class="ck off">✓</span><span style="color:#334155">Strategy call — not included</span></li>
+      </ul>
+      <a href="#" class="t-btn">Get Started →</a>
+    </div>
+    <div class="tier">
+      <div class="t-label">Elite</div>
+      <div class="t-price">$1,997<sub>/mo</sub></div>
+      <div class="t-tag">Full-stack AI marketing, completely done for you</div>
+      <ul class="t-list">
+        <li><span class="ck">✓</span>Everything in Growth</li>
+        <li><span class="ck">✓</span>Meta Ads — up to $10K/mo spend managed</li>
+        <li><span class="ck">✓</span>40+ posts/month across all platforms</li>
+        <li><span class="ck">✓</span>5 competitors tracked monthly</li>
+        <li><span class="ck">✓</span>GHL automation + lead nurture sequences</li>
+        <li><span class="ck">✓</span>4 videos → 40 posts/month pipeline</li>
+        <li><span class="ck">✓</span>Monthly 1:1 strategy call</li>
+      </ul>
+      <a href="#" class="t-btn">Get Started →</a>
+    </div>
+  </div>
+  <div class="rec" style="margin-top:24px">
+    <p style="font-size:13px;color:#94a3b8"><strong style="color:#f0f4ff">One-time add-ons:</strong> &nbsp; Social account setup &amp; optimization — <strong style="color:#f0f4ff">$497</strong> &nbsp;·&nbsp; GHL sub-account + workflow build — <strong style="color:#f0f4ff">$1,497</strong> &nbsp;·&nbsp; Vibe Prospector outreach setup — <strong style="color:#f0f4ff">$297</strong></p>
+  </div>
+</div>
+
+<!-- B -->
+<div id="s-b" class="section">
+  <div class="sec-head"><h2>Model B — À La Carte Service Menu</h2><p>Individual services priced separately. Clients build their own stack. Best for upselling existing clients.</p></div>
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">📱</div>
+      <div class="c-name">AI Social Posting</div>
+      <div class="c-price">$497<small>/mo</small></div>
+      <div class="c-desc">20 posts/month written by AI, scheduled &amp; published via GHL. LinkedIn, Facebook, Instagram, TikTok. Content calendar included.</div>
+      <div class="c-inc">Includes: <b>all 4 platforms · monthly calendar · brand voice</b></div>
+    </div>
+    <div class="card">
+      <div class="c-icon">👾</div>
+      <div class="c-name">Reddit Domination</div>
+      <div class="c-price">$597<small>/mo</small></div>
+      <div class="c-desc">Monitor 8 subreddits. 20 replies drafted in your voice + 4 original posts/month. Weekly digest of opportunities surfaced.</div>
+      <div class="c-inc">Includes: <b>reply drafts · weekly digest · post calendar</b></div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🎯</div>
+      <div class="c-name">FB Group Audience Builder</div>
+      <div class="c-price">$497<small>/mo</small></div>
+      <div class="c-desc">Apify scrapes members from target Facebook groups in your niche. Uploads to Meta as Custom Audience for retargeting. Monthly refresh.</div>
+      <div class="c-inc">Includes: <b>group scrape · audience upload · lookalike build</b></div>
+    </div>
+    <div class="card">
+      <div class="c-icon">📊</div>
+      <div class="c-name">Meta Ads Management</div>
+      <div class="c-price">$997<small>/mo</small></div>
+      <div class="c-desc">Campaign creation, A/B testing, weekly optimization. Up to $5K/mo ad spend. Weekly performance report. Kill/scale decisions every 7 days.</div>
+      <div class="c-inc">Includes: <b>copy · creatives · weekly report · pixel setup</b></div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🔍</div>
+      <div class="c-name">Competitor Intelligence</div>
+      <div class="c-price">$397<small>/mo</small></div>
+      <div class="c-desc">Monthly audit of 3–5 competitors. What's performing, what gaps exist, what to do differently. Delivered as action report.</div>
+      <div class="c-inc">Includes: <b>social analysis · ad spy · content gap report</b></div>
+    </div>
+    <div class="card">
+      <div class="c-icon">♻️</div>
+      <div class="c-name">Content Repurposing Engine</div>
+      <div class="c-price">$697<small>/mo</small></div>
+      <div class="c-desc">4 videos/month → 40+ posts. YouTube, podcasts, webinars all work. One piece of content, everywhere, every week.</div>
+      <div class="c-inc">Includes: <b>transcription · reformatting · scheduling</b></div>
+    </div>
+    <div class="card">
+      <div class="ot">ONE-TIME</div>
+      <div class="c-icon">⚡</div>
+      <div class="c-name">GHL Full Setup</div>
+      <div class="c-price">$1,497</div>
+      <div class="c-desc">Full GHL sub-account — pipelines, automation workflows, lead nurture, social posting calendar, integrations. 30-day support included.</div>
+    </div>
+    <div class="card">
+      <div class="ot">ONE-TIME</div>
+      <div class="c-icon">🏗️</div>
+      <div class="c-name">Social Account Launch</div>
+      <div class="c-price">$497</div>
+      <div class="c-desc">Set up all social accounts with consistent handles, bios, profile images, first 5 posts, pixel installed. Facebook, Instagram, LinkedIn, TikTok, X.</div>
+    </div>
+    <div class="card">
+      <div class="ot">ONE-TIME</div>
+      <div class="c-icon">📬</div>
+      <div class="c-name">Vibe Prospector Setup</div>
+      <div class="c-price">$297</div>
+      <div class="c-desc">Configure weekly new-LLC scraping for your niche. GHL import + 3-email cold sequence. Runs automatically. New leads every week.</div>
+    </div>
+  </div>
+  <div class="rec" style="margin-top:24px">
+    <p style="font-size:13px;color:#94a3b8"><strong style="color:#f0f4ff">Common stacks:</strong> &nbsp; Social + Reddit + Competitor = <strong style="color:#f0f4ff">$1,491/mo</strong> &nbsp;·&nbsp; Add FB Groups + Ads = <strong style="color:#f0f4ff">$2,488/mo</strong> &nbsp;·&nbsp; Full stack = <strong style="color:#f0f4ff">$3,185/mo</strong></p>
+  </div>
+</div>
+
+<!-- C -->
+<div id="s-c" class="section">
+  <div class="sec-head"><h2>Model C — Outcome-Based Bundles ⭐</h2><p>Named after what the client wants. Business owners don't buy "Reddit monitoring" — they buy leads and customers.</p></div>
+  <div class="outcomes">
+    <div class="out blue">
+      <div class="out-h">
+        <div class="out-num">Package 01</div>
+        <div class="out-name">Get Found</div>
+        <div class="out-sub">Build your presence and show up consistently where your customers are already looking.</div>
+        <div class="out-pr"><strong>$597</strong><span>/month</span></div>
+      </div>
+      <div class="out-b">
+        <h4>What we do for you</h4>
+        <ul>
+          <li><div class="dot"></div>20 AI-written posts/month published to all social accounts via GHL</li>
+          <li><div class="dot"></div>Reddit presence — 10 replies/month in subreddits where your customers ask questions</li>
+          <li><div class="dot"></div>1 competitor audit so you know what's working in your space</li>
+          <li><div class="dot"></div>Monthly content calendar — always know what's going out</li>
+          <li><div class="dot"></div>Consistent brand voice across every platform</li>
+        </ul>
+      </div>
+      <a href="#" class="out-cta">Start Getting Found →</a>
+    </div>
+
+    <div class="out cyan">
+      <div class="out-h">
+        <div class="out-num">Package 02</div>
+        <div class="out-name">Get Leads</div>
+        <div class="out-sub">Everything in Get Found, plus paid and organic systems that actively bring people to you.</div>
+        <div class="out-pr"><strong>$1,297</strong><span>/month</span></div>
+      </div>
+      <div class="out-b">
+        <h4>Everything in Get Found, plus</h4>
+        <ul>
+          <li><div class="dot"></div>Facebook/Instagram ads managed — copy, testing, weekly optimization</li>
+          <li><div class="dot"></div>Facebook Group audience builder — scrape your niche's groups, retarget those members</li>
+          <li><div class="dot"></div>Reddit raised to 20 replies + 4 original posts/month</li>
+          <li><div class="dot"></div>Content repurposing — send 2 videos, we turn them into 20 posts</li>
+          <li><div class="dot"></div>Weekly performance report — what's working, what we're changing</li>
+        </ul>
+      </div>
+      <a href="#" class="out-cta">Start Getting Leads →</a>
+    </div>
+
+    <div class="out violet">
+      <div class="out-h">
+        <div class="out-num">Package 03</div>
+        <div class="out-name">Get Customers</div>
+        <div class="out-sub">The full stack. Every channel working together. Completely done for you.</div>
+        <div class="out-pr"><strong>$2,497</strong><span>/month</span></div>
+      </div>
+      <div class="out-b">
+        <h4>Everything in Get Leads, plus</h4>
+        <ul>
+          <li><div class="dot"></div>40+ posts/month — more volume, more reach, more platforms</li>
+          <li><div class="dot"></div>5 competitors tracked monthly — gaps identified, content gaps filled</li>
+          <li><div class="dot"></div>GHL automation — lead nurture, follow-up workflows, pipeline management</li>
+          <li><div class="dot"></div>4 videos → 40+ posts/month content pipeline</li>
+          <li><div class="dot"></div>Vibe Prospector — new LLCs in your niche get a personalized cold sequence weekly</li>
+          <li><div class="dot"></div>Monthly strategy call — review, adjust, plan next 30 days</li>
+        </ul>
+      </div>
+      <a href="#" class="out-cta">Get Customers Now →</a>
+    </div>
+  </div>
+  <div class="rec">
+    <div class="rbadge">⭐ Why This Model Wins</div>
+    <h3>Business owners don't buy "Reddit monitoring"</h3>
+    <p>They buy leads. They buy customers. They buy time back. Naming packages after outcomes removes the price objection entirely. You're selling results — and results have an obvious value that's easy to justify.</p>
+  </div>
+</div>
+
+<!-- D COMPARE -->
+<div id="s-d" class="section">
+  <div class="sec-head"><h2>Side-by-Side Comparison</h2><p>Which model fits how you want to sell and who you're selling to.</p></div>
+  <table class="ctable">
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th>A — Three Tiers</th>
+        <th>B — À La Carte</th>
+        <th>C — Outcome Bundles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ease of selling cold</td><td class="yes">✓ Easy</td><td class="no">✗ Hard</td><td class="yes">✓✓ Easiest</td></tr>
+      <tr><td>Price justification</td><td class="mid">~ Medium</td><td class="no">✗ Client haggles</td><td class="yes">✓ Strong ROI story</td></tr>
+      <tr><td>Upsell potential</td><td class="mid">~ Tier upgrades</td><td class="yes">✓✓ Add anything</td><td class="mid">~ Package upgrades</td></tr>
+      <tr><td>Delivery complexity</td><td class="yes">✓ Simple</td><td class="no">✗ Track per client</td><td class="yes">✓ Clear scope</td></tr>
+      <tr><td>Avg monthly contract</td><td>$497–$1,997</td><td>$500–$3,200+</td><td>$597–$2,497</td></tr>
+      <tr><td>Works for cold outreach</td><td class="mid">~ Yes</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
+      <tr><td>Works for referrals</td><td class="yes">✓ Yes</td><td class="yes">✓✓ Yes</td><td class="yes">✓ Yes</td></tr>
+      <tr><td>Profit margin per client</td><td class="yes">✓ High</td><td class="mid">~ Medium</td><td class="yes">✓✓ Highest</td></tr>
+    </tbody>
+  </table>
+  <div class="rec" style="margin-top:28px">
+    <div class="rbadge">Recommendation</div>
+    <h3>Start with Model C. Layer in Model B as you grow.</h3>
+    <p>Launch with the three outcome bundles — they close faster on cold traffic. As you build a client base, introduce à la carte add-ons for upsells. Model A is solid but outcome names convert better in 2025/2026 for service businesses.</p>
+  </div>
+  <div class="lead-box">
+    <h3>Where to find the first clients:</h3>
+    <div class="lead-grid">
+      <div class="lead-item star">⭐ Best source<br><b>freefundingplan.com leads</b>Business owners who just got funded need to market next — perfect handoff</div>
+      <div class="lead-item"><b>Vibe Prospector</b>New LLC cold email: "want us to handle your marketing while you focus on the business?"</div>
+      <div class="lead-item"><b>Reddit organic</b>Show up in r/smallbusiness answering marketing questions → link in bio to service page</div>
+      <div class="lead-item"><b>Facebook Groups</b>Join small biz owner groups, post value → DM interested members</div>
+      <div class="lead-item"><b>LinkedIn outreach</b>Target founders/owners of 1–10 person companies in your niche</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
